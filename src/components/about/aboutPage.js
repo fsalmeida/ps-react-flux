@@ -3,7 +3,21 @@
 var React = require('react');
 
 var About = React.createClass({
-   render: function(){
+    statics: {
+        willTransitionTo: function(transition, params, query, callback) {
+            if (!confirm('Are you sure you want to read a page that is this boring?')) {
+                transition.about();
+            } else {
+                callback();
+            }
+        },
+        willTransitionFrom: function(transition, component) {
+            if (!confirm('Are you sure you want to leave a page that is this exiting?')) {
+                transition.about();
+            }
+        }
+    },
+    render: function(){
        return (
            <div>
                <h1>About</h1>
@@ -21,7 +35,7 @@ var About = React.createClass({
                </p>
            </div>
        );
-   }
+    }
 });
 
 module.exports = About;
